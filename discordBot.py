@@ -2,6 +2,8 @@ import discord
 import os
 import requests
 import json
+import space
+
 token = 'OTM5NjkwMzM3NTYyMTQ0ODc5.Yf8g0w._q2K2sBp9IlApHn1sADwnEUjbyI' # insert token here!!
 client = discord.Client()
 dog_words = ["dog","facts","woof","puppy","dogpics"]
@@ -75,5 +77,22 @@ async def on_message(message):
     if any(word in message.content for word in pun_words):
         pun = get_pun()
         await message.channel.send(pun)
+
+# dog image feature
+    if message.content.startswith('$dogpics'):
+        dog_info = requests.get("https://dog.ceo/api/breeds/image/random")
+        embed = discord.Embed(
+            title="Dog!", description="Feeling down? Have a dog!", color=0x047C91
+        )
+        embed.set_image(url=dog_info.json()["message"])
+        await message.channel.send(embed=embed)
+
+# space-stuff
+    if "asteroid" in message.content or "jpl" in message.content or "space" in message.content:
+        await message.channel.send(space.get_asteroid_death())
+
+    if "solar eclipse" in message.content or "solar" in message.content:
+        await message.channel.send(space.get_solar_eclipse())
+
 
 client.run(token)
