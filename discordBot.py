@@ -91,7 +91,7 @@ async def on_message(message):
     if message.content.startswith('$dogpics'):
         dog_info = requests.get("https://dog.ceo/api/breeds/image/random")
         embed = discord.Embed(
-            title="Dog!", description="Feeling down? Have a dog!", color=0x047C91
+            title="Dog!", description="Feeling down? Here's a dog!", color=0x047C91
         )
         embed.set_image(url=dog_info.json()["message"])
         await message.channel.send(embed=embed)
@@ -105,7 +105,18 @@ async def on_message(message):
         
 # to do list
     if message.content == "$help":
-        await message.channel.send("here are your possible commands! $hello, $dogpics, $todo, $todo check, $todo remove, and more. hope that helps :)")
+        embed = discord.Embed(
+            title="Help", description="here are your possible commands!", color=0x047C91
+        )
+        embed.add_field(name='Pro tip:', value='Type in keywords related to dogs, space, programming, or jokes for those commands', inline='false')
+        embed.add_field(name='`$hello`', value='Hello', inline='false')
+        embed.add_field(name='`$dogpics`', value='Sends a dog pic', inline='false')
+        embed.add_field(name='`$todo`', value='make a todo list', inline='false')
+        embed.add_field(name='`$todo check`', value='check todo list', inline='false')
+        embed.add_field(name='`$todo remove`', value='remove item from todo', inline='false')
+        #embed.add_field(name='$hello', value='Hello', inline='false')
+        embed.set_footer(text="hope that helps :)")
+        await message.channel.send(embed=embed)
 
     if message.content == ('$todo'):
         await message.channel.send('correct usage: $todo [message], $todo check, $todo remove [message]')
