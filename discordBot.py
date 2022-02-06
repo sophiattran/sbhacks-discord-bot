@@ -5,12 +5,11 @@ import json
 import space
 import random
 
-token = '' # insert token here!!
+token = 'OTM5NjkwMzM3NTYyMTQ0ODc5.Yf8g0w.w5JGOEvAzxjcRyFqVwhi-vM8YIs' # insert token here!!
 client = discord.Client()
 dog_words = ["dog","facts","woof","puppy","dogpics"]
 programming_words = ["programming","coding","computer science","computer","visual studio","code","program"]
-joke_words = ["joke","funny","laugh"]
-pun_words = ["pun","cheese","cheesy"]
+greetings = ["hi! hope ur doing well homie","hey bestie!","what's up mate","hii omg i've missed you","heyy!!","hello!!"]
 laugh_words = ["lol","lmao","lmfao","haha","hehe","lul","xd","rofl",":joy:","LOL","LMAO","LMFAO","HAHA","HEHE","LUL","XD","ROFL"]
 todolist = []
 
@@ -62,25 +61,29 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('hello'):
-        await message.channel.send('Hello!')
+# greeting feature
+    if message.content.startswith('$hi') or message.content.startswith('$hello'):
+        await message.channel.send(random.choice(greetings))
 
+# laughs along 
     if any(word in message.content for word in laugh_words):
         await message.channel.send(random.choice(laugh_words))
 
-    if any(word in message.content for word in dog_words):
+# dog facts
+    if any('$' + word in message.content for word in dog_words):
         dog_fact = get_dog_fact()
         await message.channel.send(dog_fact)
 
-    if any(word in message.content for word in programming_words):
+# jokes
+    if any('$' + word in message.content for word in programming_words):
         programming_joke = get_programming_joke()
         await message.channel.send(programming_joke)
 
-    if any(word in message.content for word in joke_words):
+    if "$joke" in message.content:
         joke = get_normal_joke()
         await message.channel.send(joke)
 
-    if any(word in message.content for word in pun_words):
+    if "$pun" in message.content:
         pun = get_pun()
         await message.channel.send(pun)
 
@@ -94,10 +97,10 @@ async def on_message(message):
         await message.channel.send(embed=embed)
 
 # space-stuff
-    if "asteroid" in message.content or "jpl" in message.content or "space" in message.content:
+    if "$asteroid" in message.content or "$jpl" in message.content or "$space" in message.content:
         await message.channel.send(space.get_asteroid_death())
 
-    if "solar eclipse" in message.content or "solar" in message.content:
+    if "$eclipse" in message.content or "$solar" in message.content:
         await message.channel.send(space.get_solar_eclipse())
         
 # to do list
