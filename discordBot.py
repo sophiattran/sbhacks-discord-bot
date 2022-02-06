@@ -6,8 +6,9 @@ token = 'OTM5NjkwMzM3NTYyMTQ0ODc5.Yf8g0w._q2K2sBp9IlApHn1sADwnEUjbyI' # insert t
 client = discord.Client()
 dog_words = ["dog","facts","woof","puppy","dogpics"]
 programming_words = ["programming","coding","computer science","computer","visual studio","code","program","cs"]
-joke_words = ["joke","funny","laugh","lol","lmao","haha"]
+joke_words = ["joke","funny","laugh"]
 pun_words = ["pun","cheese","cheesy"]
+laugh_words = ["lol","lmao","haha"]
 
 headers = {
     'authorization': "GoPCfZ5gEUKf",
@@ -57,8 +58,8 @@ async def on_message(message):
     if message.content.startswith('hello'):
         await message.channel.send('Hello!')
 
-    if message.author == client.user:
-        return
+    if any(word in message.content for word in laugh_words):
+        await message.channel.send("LOL")
 
     if any(word in message.content for word in dog_words):
         dog_fact = get_dog_fact()
@@ -75,5 +76,8 @@ async def on_message(message):
     if any(word in message.content for word in pun_words):
         pun = get_pun()
         await message.channel.send(pun)
+
+    if message.author == client.user:
+        return
 
 client.run(token)
