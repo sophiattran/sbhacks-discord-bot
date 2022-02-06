@@ -148,7 +148,7 @@ async def on_message(message):
         embed.add_field(name='`$todo check`', value='checks todo list', inline='true')
         embed.add_field(name='`$todo remove`', value='removes item from todo', inline='true')
         embed.add_field(name='`$pun`', value='sends a pun', inline='true')
-        embed.add_field(name='`$joke`', value='sends a pun', inline='true')
+        embed.add_field(name='`$joke`', value='sends a joke', inline='true')
         embed.add_field(name='`$csjoke`', value='sends a cs related joke', inline='true')
         embed.add_field(name='`$asteroid`', value='sends an asteroid fact', inline='true')
         embed.add_field(name='`$eclipse`', value='tells you the next solar eclipse', inline='true')
@@ -156,5 +156,3 @@ async def on_message(message):
         await message.channel.send(embed=embed)
 
 client.run(token)
-
-#test
