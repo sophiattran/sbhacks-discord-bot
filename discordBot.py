@@ -11,6 +11,7 @@ programming_words = ["programming","coding","computer science","computer","visua
 joke_words = ["joke","funny","laugh"]
 pun_words = ["pun","cheese","cheesy"]
 laugh_words = ["lol","lmao","haha"]
+todolist = []
 
 headers = {
     'authorization': "GoPCfZ5gEUKf",
@@ -97,6 +98,36 @@ async def on_message(message):
 
     if "solar eclipse" in message.content or "solar" in message.content:
         await message.channel.send(space.get_solar_eclipse())
+        
+# to do list
+    if message.content == "$help":
+        await message.channel.send("here are your possible commands! $hello, $dogpics, $todo, $todo check, $todo remove, and more. hope that helps :)")
+
+    if message.content == ('$todo'):
+        await message.channel.send('correct usage: $todo [message]')
+    if message.content.startswith('$todo '):
+        print(message.content[6:])
+        if message.content[6:] == 'check':
+            printthis = 'to do list:'
+            if todolist == []:
+                await message.channel.send('your to do list is empty :))')
+            else:
+                for item in todolist:
+                    printthis += '\n- ' + str(item)
+                await message.channel.send(printthis)
+        elif message.content[6:].startswith('remove '):
+            print(message.content[13:])
+            print(todolist)
+            if message.content[13:] in todolist:
+                todolist.remove(message.content[13:])
+                await message.channel.send(message.content[13:]  + ' has been removed! yayyy good job!! :^)')
+            else:
+                await message.channel.send("can't remove that from your todo list! it doesn't exist :,)")
+        else:
+            if todolist == []:
+                await message.channel.send("creating to do list")
+            await message.channel.send('adding ' +  message.content[6:] + ' to your to do list!')
+            todolist.append(message.content[6:])
 
 
 client.run(token)
