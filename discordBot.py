@@ -2,10 +2,12 @@ import discord
 import os
 import requests
 import json
-token = 'OTM5NjkwMzM3NTYyMTQ0ODc5.Yf8g0w._q2K2sBp9IlApHn1sADwnEUjbyI' # insert token here!!
+import space
+
+token = 'OTM5NjkwMzM3NTYyMTQ0ODc5.Yf8g0w.f6Qz1TFW0tIWFekJxe98Yv_lPOg' # insert token here!!
 client = discord.Client()
 dog_words = ["dog","facts","woof","puppy","dogpics"]
-programming_words = ["programming","coding","computer science","computer","visual studio","code","program","cs"]
+programming_words = ["programming","coding","computer science","computer","visual studio","code","program"]
 joke_words = ["joke","funny","laugh"]
 pun_words = ["pun","cheese","cheesy"]
 laugh_words = ["lol","lmao","haha"]
@@ -46,7 +48,7 @@ def get_pun():
 def get_dog_fact():
     response = requests.get("https://dog-api.kinduff.com/api/facts")
     json_data = json.loads(response.text)
-    dog_fact = json_data['facts'][0]
+    dog_fact = "Did you know? " + json_data['facts'][0]
     return(dog_fact)
 
 @client.event
@@ -55,6 +57,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if message.author == client.user:
+        return
+
     if message.content.startswith('hello'):
         await message.channel.send('Hello!')
 
@@ -77,7 +82,21 @@ async def on_message(message):
         pun = get_pun()
         await message.channel.send(pun)
 
-    if message.author == client.user:
-        return
+# dog image feature
+    if message.content.startswith('$dogpics'):
+        dog_info = requests.get("https://dog.ceo/api/breeds/image/random")
+        embed = discord.Embed(
+            title="Dog!", description="Feeling down? Have a dog!", color=0x047C91
+        )
+        embed.set_image(url=dog_info.json()["message"])
+        await message.channel.send(embed=embed)
+
+# space-stuff
+    if "asteroid" in message.content or "jpl" in message.content or "space" in message.content:
+        await message.channel.send(space.get_asteroid_death())
+
+    if "solar eclipse" in message.content or "solar" in message.content:
+        await message.channel.send(space.get_solar_eclipse())
+
 
 client.run(token)
