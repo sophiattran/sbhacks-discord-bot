@@ -9,11 +9,9 @@ token = '' # insert token here!!
 client = discord.Client()
 dog_words = ["dog","facts","woof","puppy","dogpics"]
 programming_words = ["programming","coding","computer science","computer","visual studio","code","program"]
-joke_words = ["joke","funny","laugh"]
-pun_words = ["pun","cheese","cheesy"]
+greetings = ["hi! hope ur doing well homie","hey bestie!","what's up mate","hii i've missed you","heyy!!","hello!!"]
 laugh_words = ["lol","lmao","lmfao","haha","hehe","lul","xd","rofl",":joy:","LOL","LMAO","LMFAO","HAHA","HEHE","LUL","XD","ROFL"]
 todolist = []
-users = []
 
 headers = {
     'authorization': "GoPCfZ5gEUKf",
@@ -63,25 +61,29 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('hello'):
-        await message.channel.send('Hello!')
+# greeting feature
+    if message.content.startswith('$hi') or message.content.startswith('$hello'):
+        await message.channel.send(random.choice(greetings))
 
+# laughs along 
     if any(word in message.content for word in laugh_words):
         await message.channel.send(random.choice(laugh_words))
 
-    if any(word in message.content for word in dog_words):
+# dog facts
+    if any('$' + word in message.content for word in dog_words):
         dog_fact = get_dog_fact()
         await message.channel.send(dog_fact)
 
-    if any(word in message.content for word in programming_words):
+# jokes
+    if any('$' + word in message.content for word in programming_words):
         programming_joke = get_programming_joke()
         await message.channel.send(programming_joke)
 
-    if any(word in message.content for word in joke_words):
+    if "$joke" in message.content:
         joke = get_normal_joke()
         await message.channel.send(joke)
 
-    if any(word in message.content for word in pun_words):
+    if "$pun" in message.content:
         pun = get_pun()
         await message.channel.send(pun)
 
@@ -95,10 +97,10 @@ async def on_message(message):
         await message.channel.send(embed=embed)
 
 # space-stuff
-    if "asteroid" in message.content or "jpl" in message.content or "space" in message.content:
+    if "$asteroid" in message.content or "$jpl" in message.content or "$space" in message.content:
         await message.channel.send(space.get_asteroid_death())
 
-    if "solar eclipse" in message.content or "solar" in message.content:
+    if "$eclipse" in message.content or "$solar" in message.content:
         await message.channel.send(space.get_solar_eclipse())
         
 # to do list
@@ -106,33 +108,29 @@ async def on_message(message):
         await message.channel.send("here are your possible commands! $hello, $dogpics, $todo, $todo check, $todo remove, and more. hope that helps :)")
 
     if message.content == ('$todo'):
-        await message.channel.send('correct usage: $todo [message], $todo check, $todo remove [message]')
+        await message.channel.send('correct usage: $todo [message]')
     if message.content.startswith('$todo '):
+        print(message.content[6:])
         if message.content[6:] == 'check':
             printthis = 'to do list:'
-            if message.author not in users:
+            if todolist == []:
                 await message.channel.send('your to do list is empty :))')
             else:
-                for item in users[users.index(message.author)+1]:
+                for item in todolist:
                     printthis += '\n- ' + str(item)
                 await message.channel.send(printthis)
         elif message.content[6:].startswith('remove '):
-            todolist = users[users.index(message.author)+1]
+            print(message.content[13:])
+            print(todolist)
             if message.content[13:] in todolist:
                 todolist.remove(message.content[13:])
                 await message.channel.send(message.content[13:]  + ' has been removed! yayyy good job!! :^)')
-                if todolist == []:
-                    users.remove(users.index(message.author)+1)
-                    users.remove(users.index(message.author))
             else:
                 await message.channel.send("can't remove that from your todo list! it doesn't exist :,)")
         else:
-            if message.author not in users:
-                await message.channel.send("creating new to do list for " + str(message.author) + "!")
-                users.append(message.author) 
-                users.append([]) 
+            if todolist == []:
+                await message.channel.send("creating to do list")
             await message.channel.send('adding ' +  message.content[6:] + ' to your to do list!')
-            todolist = users[users.index(message.author)+1]
             todolist.append(message.content[6:])
 
 
