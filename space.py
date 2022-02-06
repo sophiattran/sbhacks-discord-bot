@@ -25,7 +25,7 @@ blankURL = "https://api.nasa.gov/neo/rest/v1/feed?start_date={date}&end_date={da
 def get_asteroid_death():
     # get api url to asteroid data
     randomDate = get_random_date()
-    apiURL = blankURL.format(date = randomDate, NASAAPIKEY = "INSERTAPIHERE")
+    apiURL = blankURL.format(date = randomDate, NASAAPIKEY = "XiITDJSODpcmdLEtfLL4N7Qsltd4pLJF2qjqV5MU")
 
     # get Json response
     response = requests.get(apiURL)
@@ -43,7 +43,7 @@ def get_asteroid_death():
         messages = []
 
         messages.append("Bro, you would've likely died on " + randomDate + " if asteroid " + name + " had come " + distance + " km closer to the Earth.")
-        messages.append("Did you know? Asteroid " + name + " that's ~" + str(diameter) + " meters in length passed by Earth at a height of " + distance + " km on " + randomDate)
+        messages.append("Did you know? Asteroid " + name + ", which was ~" + str(diameter) + " meters in length, passed by Earth at a height of " + distance + " km on " + randomDate + ".")
         messages.append("On " + randomDate + ", NASA JPL detected " + str(size) + " asteroids passing by Earth -- but not too close, of course.")
         results.append(messages)
 
