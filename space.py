@@ -43,7 +43,7 @@ def get_asteroid_death():
         messages = []
 
         messages.append("Bro, you would've likely died on " + randomDate + " if asteroid " + name + " had come " + distance + " km closer to the Earth.")
-        messages.append("Did you know? Asteroid " + name + " that's ~" + str(diameter) + " meters in length passed by Earth at a height of " + distance + " km on " + randomDate)
+        messages.append("Did you know? Asteroid " + name + ", which was ~" + str(diameter) + " meters in length, passed by Earth at a height of " + distance + " km on " + randomDate + ".")
         messages.append("On " + randomDate + ", NASA JPL detected " + str(size) + " asteroids passing by Earth -- but not too close, of course.")
         results.append(messages)
 

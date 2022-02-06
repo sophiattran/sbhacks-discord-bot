@@ -5,7 +5,7 @@ import json
 import space
 import random
 
-token = '' # insert token here!!
+token = 'OTM5NjkwMzM3NTYyMTQ0ODc5.Yf8g0w.1qMyMCTgk0WGbC9esYgttvih-sU' # insert token here!!
 client = discord.Client()
 dog_words = ["dog","facts","woof","puppy","dogpics","dogfacts"]
 programming_words = ["csjoke","programming","coding","computer science","computer","visual studio","code","program"]
@@ -141,17 +141,17 @@ async def on_message(message):
             title="Help", description="here are your possible commands!", color=0x047C91
         )
         embed.add_field(name='Pro tip:', value='Type in keywords related to dogs, space, programming, or jokes for those commands', inline='false')
-        embed.add_field(name='`$hello`', value='greets the bot', inline='false')
-        embed.add_field(name='`$dogfacts`', value='sends a dog fact', inline='false')
-        embed.add_field(name='`$dogpics`', value='sends a dog pic', inline='false')
-        embed.add_field(name='`$todo`', value='makes a todo list', inline='false')
-        embed.add_field(name='`$todo check`', value='checks todo list', inline='false')
-        embed.add_field(name='`$todo remove`', value='removes item from todo', inline='false')
-        embed.add_field(name='`$asteroid`', value='----', inline='false')
-        embed.add_field(name='`$eclipse`', value='----', inline='false')
-        embed.add_field(name='`$pun`', value='sends a pun', inline='false')
-        embed.add_field(name='`$joke`', value='sends a pun', inline='false')
-        embed.add_field(name='`$csjoke`', value='sends a cs related joke', inline='false')
+        embed.add_field(name='`$hello`', value='greets the bot', inline='true')
+        embed.add_field(name='`$dogfacts`', value='sends a dog fact', inline='true')
+        embed.add_field(name='`$dogpics`', value='sends a dog pic', inline='true')
+        embed.add_field(name='`$todo`', value='makes a todo list', inline='true')
+        embed.add_field(name='`$todo check`', value='checks todo list', inline='true')
+        embed.add_field(name='`$todo remove`', value='removes item from todo', inline='true')
+        embed.add_field(name='`$pun`', value='sends a pun', inline='true')
+        embed.add_field(name='`$joke`', value='sends a pun', inline='true')
+        embed.add_field(name='`$csjoke`', value='sends a cs related joke', inline='true')
+        embed.add_field(name='`$asteroid`', value='sends an asteroid fact', inline='true')
+        embed.add_field(name='`$eclipse`', value='tells you the next solar eclipse', inline='true')
         embed.set_footer(text="hope that helps :)")
         await message.channel.send(embed=embed)
 
