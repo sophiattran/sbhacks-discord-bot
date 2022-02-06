@@ -5,17 +5,14 @@ import json
 import space
 import random
 
-token = 'OTM5NjkwMzM3NTYyMTQ0ODc5.Yf8g0w.w5JGOEvAzxjcRyFqVwhi-vM8YIs' # insert token here!!
+token = '' # insert token here!!
 client = discord.Client()
 dog_words = ["dog","facts","woof","puppy","dogpics"]
 programming_words = ["programming","coding","computer science","computer","visual studio","code","program"]
-<<<<<<< HEAD
-greetings = ["hi! hope ur doing well homie","hey bestie!","what's up mate","hii omg i've missed you","heyy!!","hello!!"]
-=======
 greetings = ["hi! hope ur doing well homie","hey bestie!","what's up mate","hii i've missed you","heyy!!","hello!!"]
->>>>>>> 03136efd29ea5d4f91f1e81672bd1e71e333042b
 laugh_words = ["lol","lmao","lmfao","haha","hehe","lul","xd","rofl",":joy:","LOL","LMAO","LMFAO","HAHA","HEHE","LUL","XD","ROFL"]
 todolist = []
+users = []
 
 headers = {
     'authorization': "GoPCfZ5gEUKf",
@@ -128,8 +125,8 @@ async def on_message(message):
                 todolist.remove(message.content[13:])
                 await message.channel.send(message.content[13:]  + ' has been removed! yayyy good job!! :^)')
                 if todolist == []:
-                    users.remove(users.index(message.author)+1)
-                    users.remove(users.index(message.author))
+                    users.pop(users.index(message.author)+1)
+                    users.pop(users.index(message.author))
             else:
                 await message.channel.send("can't remove that from your todo list! it doesn't exist :,)")
         else:
