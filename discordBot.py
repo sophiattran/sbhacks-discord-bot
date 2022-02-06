@@ -1,10 +1,11 @@
 import discord
 import requests
 #import os
+import space
+
+token = '' # insert token here!!
 
 client = discord.Client()
-
-token = '' #insert token here!!
 
 @client.event
 async def on_ready():
@@ -28,6 +29,13 @@ async def on_message(message):
         )
         embed.set_image(url=dog_info.json()["message"])
         await message.channel.send(embed=embed)
-        
+
+# space-stuff
+    if "asteroid" in message.content or "jpl" in message.content or "space" in message.content:
+        await message.channel.send(space.get_asteroid_death())
+
+    if "solar eclipse" in message.content or "solar" in message.content:
+        await message.channel.send(space.get_solar_eclipse())
+
 
 client.run(token)
