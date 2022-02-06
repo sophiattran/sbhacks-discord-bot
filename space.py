@@ -25,7 +25,7 @@ blankURL = "https://api.nasa.gov/neo/rest/v1/feed?start_date={date}&end_date={da
 def get_asteroid_death():
     # get api url to asteroid data
     randomDate = get_random_date()
-    apiURL = blankURL.format(date = randomDate, NASAAPIKEY = "INSERTAPIHERE")
+    apiURL = blankURL.format(date = randomDate, NASAAPIKEY = "XiITDJSODpcmdLEtfLL4N7Qsltd4pLJF2qjqV5MU")
 
     # get Json response
     response = requests.get(apiURL)
