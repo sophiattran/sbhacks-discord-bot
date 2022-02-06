@@ -5,7 +5,7 @@ import json
 import space
 import random
 
-token = 'OTM5NjkwMzM3NTYyMTQ0ODc5.Yf8g0w.1qMyMCTgk0WGbC9esYgttvih-sU' # insert token here!!
+token = '' # insert token here!!
 client = discord.Client()
 dog_words = ["dog","facts","woof","puppy","dogpics","dogfacts"]
 programming_words = ["csjoke","programming","coding","computer science","computer","visual studio","code","program"]
