@@ -4,12 +4,13 @@ import requests
 import json
 import space
 
-token = 'OTM5NjkwMzM3NTYyMTQ0ODc5.Yf8g0w._q2K2sBp9IlApHn1sADwnEUjbyI' # insert token here!!
+token = '' # insert token here!!
 client = discord.Client()
 dog_words = ["dog","facts","woof","puppy","dogpics"]
-programming_words = ["programming","coding","computer science","computer","visual studio","code","program","cs"]
-joke_words = ["joke","funny","laugh","lol","lmao","haha"]
+programming_words = ["programming","coding","computer science","computer","visual studio","code","program"]
+joke_words = ["joke","funny","laugh"]
 pun_words = ["pun","cheese","cheesy"]
+laugh_words = ["lol","lmao","haha"]
 
 headers = {
     'authorization': "GoPCfZ5gEUKf",
@@ -47,7 +48,7 @@ def get_pun():
 def get_dog_fact():
     response = requests.get("https://dog-api.kinduff.com/api/facts")
     json_data = json.loads(response.text)
-    dog_fact = json_data['facts'][0]
+    dog_fact = "Did you know? " + json_data['facts'][0]
     return(dog_fact)
 
 @client.event
@@ -56,11 +57,14 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if message.author == client.user:
+        return
+
     if message.content.startswith('hello'):
         await message.channel.send('Hello!')
 
-    if message.author == client.user:
-        return
+    if any(word in message.content for word in laugh_words):
+        await message.channel.send("LOL")
 
     if any(word in message.content for word in dog_words):
         dog_fact = get_dog_fact()
