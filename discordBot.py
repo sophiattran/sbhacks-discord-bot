@@ -105,20 +105,6 @@ async def on_message(message):
         await message.channel.send(space.get_solar_eclipse())
         
 # to do list
-    if message.content == "$help":
-        embed = discord.Embed(
-            title="Help", description="here are your possible commands!", color=0x047C91
-        )
-        embed.add_field(name='Pro tip:', value='Type in keywords related to dogs, space, programming, or jokes for those commands', inline='false')
-        embed.add_field(name='`$hello`', value='Hello', inline='false')
-        embed.add_field(name='`$dogpics`', value='Sends a dog pic', inline='false')
-        embed.add_field(name='`$todo`', value='make a todo list', inline='false')
-        embed.add_field(name='`$todo check`', value='check todo list', inline='false')
-        embed.add_field(name='`$todo remove`', value='remove item from todo', inline='false')
-        #embed.add_field(name='$hello', value='Hello', inline='false')
-        embed.set_footer(text="hope that helps :)")
-        await message.channel.send(embed=embed)
-
     if message.content == ('$todo'):
         await message.channel.send('correct usage: $todo [message], $todo check, $todo remove [message]')
     if message.content.startswith('$todo '):
