@@ -3,6 +3,7 @@ import os
 import requests
 import json
 import space
+import random
 
 token = '' # insert token here!!
 client = discord.Client()
@@ -10,7 +11,7 @@ dog_words = ["dog","facts","woof","puppy","dogpics"]
 programming_words = ["programming","coding","computer science","computer","visual studio","code","program"]
 joke_words = ["joke","funny","laugh"]
 pun_words = ["pun","cheese","cheesy"]
-laugh_words = ["lol","lmao","haha"]
+laugh_words = ["lol","lmao","lmfao","haha","hehe","lul","xd","rofl",":joy:","LOL","LMAO","LMFAO","HAHA","HEHE","LUL","XD","ROFL"]
 todolist = []
 
 headers = {
@@ -65,7 +66,7 @@ async def on_message(message):
         await message.channel.send('Hello!')
 
     if any(word in message.content for word in laugh_words):
-        await message.channel.send("LOL")
+        await message.channel.send(random.choice(laugh_words))
 
     if any(word in message.content for word in dog_words):
         dog_fact = get_dog_fact()
